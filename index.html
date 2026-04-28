@@ -46,7 +46,7 @@ body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #333333;
 .progress-bar { position: fixed; top: 0; left: 248px; right: 0; height: 2px; z-index: 200; }
 .progress-fill { height: 100%; background: var(--yellow); width: 0%; transition: width 0.1s; }
 /* MAIN */
-.main { margin-left: 248px; padding: 0 5rem 8rem; max-width: 900px; }
+.main { margin-left: 248px; padding: 0 4rem 8rem; max-width: 900px; width: calc(100vw - 248px); }
 /* HEADER */
 .page-header { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
 .page-tag { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem; }
@@ -188,6 +188,20 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 .closing-wrap p { font-family: 'Roboto', sans-serif; font-size: 1rem; color: #333333; line-height: 1.65rem; margin-bottom: 1rem; text-align: justify; }
 /* FOOTER - styles inlined */
 
+/* Large screens: 1400px–1800px */
+@media (min-width: 1400px) {
+  .main { max-width: 1100px; padding: 0 5rem 8rem; }
+}
+/* Extra large screens: 1800px+ (big LG monitors etc) */
+@media (min-width: 1800px) {
+  .main { max-width: 1300px; padding: 0 6rem 8rem; }
+  .sidebar { width: 280px; }
+  .main { margin-left: 280px; }
+}
+/* Ultra-wide: 2200px+ */
+@media (min-width: 2200px) {
+  .main { max-width: 1500px; padding: 0 7rem 8rem; }
+}
 @media (max-width: 900px) {
   /* Layout */
   .sidebar { display: none; }
@@ -259,55 +273,63 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
   .star-cell:nth-child(4) { border-right: none; }
 }
 
-/* ── Mobile preview toggle (removed via followup prompt) ── */
+/* ── Mobile preview bar ── */
 #mobile-preview-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-  background: #111; color: #fff; padding: 10px 20px;
-  display: flex; align-items: center; gap: 12px; font-family: 'Roboto', sans-serif; font-size: 14px;
+  background: #111; color: #fff; padding: 8px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Roboto', sans-serif; font-size: 13px;
   border-top: 2px solid var(--yellow);
+  flex-wrap: wrap;
 }
 #mobile-preview-bar button {
   background: var(--yellow); color: #111; border: none; border-radius: 6px;
-  padding: 6px 14px; font-weight: 700; cursor: pointer; font-size: 13px;
+  padding: 5px 12px; font-weight: 700; cursor: pointer; font-size: 12px;
 }
-#mobile-preview-frame-wrap {
-  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 48px;
-  background: #222; z-index: 9998; align-items: center; justify-content: center;
+#mobile-preview-bar button.active-preview {
+  background: #fff; color: #111;
 }
-#mobile-preview-frame-wrap.active { display: flex; }
-#mobile-preview-frame {
-  width: 390px; height: 100%; border: none; background: #fff;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+#mobile-preview-bar button.reset-btn {
+  background: #444; color: #fff;
 }
 </style>
 <div id="mobile-preview-bar">
-  <span>📱 Mobile Preview</span>
-  <button onclick="toggleMobilePreview('390px','iPhone 14')">iPhone 14 (390px)</button>
-  <button onclick="toggleMobilePreview('430px','iPhone 14 Plus')">iPhone 14 Plus (430px)</button>
-  <button onclick="toggleMobilePreview('768px','iPad')">iPad (768px)</button>
-  <button id="mobile-preview-close-btn" onclick="closeMobilePreview()" style="background:#555;color:#fff;display:none;">✕ Close</button>
-</div>
-<div id="mobile-preview-frame-wrap">
-  <iframe id="mobile-preview-frame" src="about:blank"></iframe>
+  <span>📱 Preview:</span>
+  <button onclick="setPreview(390,844,'iPhone (iOS — 390px)')" title="iPhone 14 / 15 — iOS Safari">iPhone (390px)</button>
+  <button onclick="setPreview(430,932,'iPhone Plus (iOS — 430px)')" title="iPhone 14 Plus / 15 Plus — iOS Safari">iPhone Plus (430px)</button>
+  <button onclick="setPreview(360,800,'Android (360px)')" title="Samsung Galaxy S / Pixel — Android Chrome">Android (360px)</button>
+  <button onclick="setPreview(412,915,'Android Large (412px)')" title="Pixel 7 / Samsung S23 — Android Chrome">Android Large (412px)</button>
+  <button onclick="setPreview(768,1024,'iPad (768px)')" title="iPad — Safari">iPad (768px)</button>
+  <button onclick="resetPreview()" class="reset-btn" id="preview-reset-btn" style="display:none;">✕ Reset</button>
+  <span id="preview-label" style="margin-left:4px;font-size:12px;color:#aaa;"></span>
 </div>
 <script>
 (function(){
-  var bar = document.getElementById('mobile-preview-bar');
-  var wrap = document.getElementById('mobile-preview-frame-wrap');
-  var frame = document.getElementById('mobile-preview-frame');
-  var closeBtn = document.getElementById('mobile-preview-close-btn');
-  window.toggleMobilePreview = function(width, label) {
-    frame.style.width = width;
-    frame.src = window.location.href.split('#')[0];
-    wrap.classList.add('active');
-    closeBtn.style.display = '';
-    bar.querySelector('span').textContent = '📱 Previewing: ' + label;
+  var originalWidth = null;
+  var originalHeight = null;
+  var resetBtn = document.getElementById('preview-reset-btn');
+  var label = document.getElementById('preview-label');
+
+  window.setPreview = function(w, h, name) {
+    if (originalWidth === null) {
+      originalWidth = window.outerWidth;
+      originalHeight = window.outerHeight;
+    }
+    window.resizeTo(w, h);
+    resetBtn.style.display = '';
+    label.textContent = '— ' + name;
+    document.querySelectorAll('#mobile-preview-bar button:not(.reset-btn)').forEach(function(b){ b.classList.remove('active-preview'); });
+    event.target.classList.add('active-preview');
   };
-  window.closeMobilePreview = function() {
-    wrap.classList.remove('active');
-    frame.src = 'about:blank';
-    closeBtn.style.display = 'none';
-    bar.querySelector('span').textContent = '📱 Mobile Preview';
+
+  window.resetPreview = function() {
+    if (originalWidth !== null) {
+      window.resizeTo(originalWidth, originalHeight);
+    }
+    resetBtn.style.display = 'none';
+    label.textContent = '';
+    document.querySelectorAll('#mobile-preview-bar button').forEach(function(b){ b.classList.remove('active-preview'); });
+    originalWidth = null;
   };
 })();
 </script>
