@@ -78,8 +78,9 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 .vm-label { color: var(--yellow); font-weight: 700; }
 .vm-text { color: rgba(255,255,255,0.90); }
 /* INDUSTRIES */
-.industry-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.5rem 0; }
-.industry-tag { background: var(--black); color: #fff; padding: 10px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600; }
+.industry-tags { display: flex; flex-wrap: nowrap; gap: 8px; margin: 1.5rem 0; overflow-x: auto; padding-bottom: 4px; }
+.industry-tag { background: var(--black); color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: background 0.2s; }
+.industry-tag:hover { background: #0c5a70; }
 /* CASE STUDIES */
 .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
 .case-card { background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; }
@@ -372,18 +373,18 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
   <h2 style="font-family:'Raleway', sans-serif; font-size:2rem; font-weight:600; line-height:2.8rem; color:var(--black); margin-bottom:1.25rem; margin-top:2.5rem; letter-spacing:0;">Industries we serve</h2>
   <p>HiveMQ operates at the intersection of industrial operations and modern data infrastructure. Our platform is trusted across sectors where real-time data reliability is mission-critical.</p>
   <div class="industry-tags">
-    <span class="industry-tag">Smart Manufacturing</span>
-    <span class="industry-tag">Automotive</span>
-    <span class="industry-tag">Energy &amp; Utilities</span>
-    <span class="industry-tag">Transportation &amp; Logistics</span>
-    <span class="industry-tag">Pharmaceuticals</span>
-    <span class="industry-tag">Data Centers</span>
-    <span class="industry-tag">Connected Vehicles</span>
-  </div>
+          <a href="https://www.hivemq.com/solutions/manufacturing/" target="_blank" rel="noopener" class="industry-tag">Smart Manufacturing</a>
+          <a href="https://www.hivemq.com/solutions/automotive-industry/" target="_blank" rel="noopener" class="industry-tag">Automotive</a>
+          <a href="https://www.hivemq.com/solutions/energy/" target="_blank" rel="noopener" class="industry-tag">Energy &amp; Utilities</a>
+          <a href="https://www.hivemq.com/solutions/energy/" target="_blank" rel="noopener" class="industry-tag">Transportation &amp; Logistics</a>
+          <a href="https://www.hivemq.com/solutions/pharma/" target="_blank" rel="noopener" class="industry-tag">Pharmaceuticals</a>
+          <a href="https://www.hivemq.com/solutions/data-center-monitoring/" target="_blank" rel="noopener" class="industry-tag">Data Centers</a>
+          <a href="https://www.hivemq.com/solutions/automotive-industry/" target="_blank" rel="noopener" class="industry-tag">Connected Vehicles</a>
+        </div>
 
   <h2 style="font-family:'Raleway', sans-serif; font-size:2rem; font-weight:600; line-height:2.8rem; color:var(--black); margin-bottom:1.25rem; margin-top:2.5rem; letter-spacing:0;">Our customers — and the problems we solve for them</h2>
   <p>Our customers operate in environments where data loss, latency, or downtime carry serious real-world consequences. Enterprises like Audi, BMW, Ford, Mercedes-Benz, Siemens, Liberty Global, and Eli Lilly choose HiveMQ because reliability is non-negotiable for them.</p>
-          <p>Feel free to read more about <a href="https://www.hivemq.com/case-studies/" target="_blank" rel="noopener noreferrer">HiveMQ Case Studies</a>.</p>
+          <p>Feel free to learn more about <a href="https://www.hivemq.com/solutions/#industry-solutions" target="_blank" rel="noopener noreferrer">HiveMQ Industry Solutions</a> and <a href="https://www.hivemq.com/case-studies/" target="_blank" rel="noopener noreferrer">Case Studies</a>.</p>
 
   <div class="case-grid">
     <!-- Manufacturing: Ford -->
