@@ -10,18 +10,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --yellow: #FFC000;
-  --teal: #0c5a70;
-  --black: #111111;
-  --body: #333333;
-  --muted: #333333;
+  --teal: #037DA5;
+  --black: #171717;
+  --body: #404040;
+  --muted: #404040;
   --light-muted: #595959;
-  --bg: #f5f4f0;
+  --bg: #ffffff;
   --card: #ffffff;
   --border: #e5e5e0;
   --dark: #141414;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #333333; line-height: 1.65rem; font-size: 1rem; }
+body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #404040; line-height: 2rem; font-size: 1.25rem; }
 
 /* SIDEBAR */
 .sidebar {
@@ -52,7 +52,7 @@ body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #333333;
 .page-header { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
 .page-tag { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem; }
 .page-tag::before { content: '—'; }
-.page-header h1 { font-family: 'Raleway', sans-serif; font-size: 2.4rem; font-weight: 700; line-height: 1.2; letter-spacing: 0; color: var(--black); margin-bottom: 1rem; white-space: nowrap; }
+.page-header h1 { font-family: 'Raleway', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1.3; letter-spacing: 0; color: var(--black); margin-bottom: 1rem; white-space: nowrap; }
 .page-header h1 .brand { color: #111111; }
 .page-intro { font-family: 'Roboto', sans-serif; font-size: 1rem; color: #333333; line-height: 1.65rem; text-align: justify; }
 /* SECTIONS */
@@ -61,7 +61,7 @@ body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #333333;
 .section-tag::before { content: '—'; }
 .section h2 { font-family: 'Raleway', sans-serif; font-size: 2rem; font-weight: 600; line-height: 2.8rem; letter-spacing: 0; color: var(--black); margin-bottom: 1.25rem; }
 .section h3 { font-family: 'Raleway', sans-serif; font-size: 1.75rem; font-weight: 400; line-height: 2.625rem; letter-spacing: 0; color: var(--black); margin: 2.5rem 0 1.25rem; }
-.section p { font-family: 'Roboto', sans-serif; color: #333333; margin-bottom: 1rem; line-height: 1.65rem; font-size: 1rem; text-align: justify; }
+.section p { font-family: 'Roboto', sans-serif; color: #404040; margin-bottom: 1rem; line-height: 2rem; font-size: 1.25rem; text-align: justify; }
 .section p strong { color: var(--body); font-weight: 600; }
 hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; }
 /* STATS */
@@ -101,7 +101,7 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 .callout { font-family: 'Roboto', sans-serif; border-left: 3px solid #FFC000; background: #faf8ef; padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.75rem 0; font-size: 1rem; color: #333333; line-height: 1.65rem; text-align: justify; }
 .callout strong { font-weight: 700; }
 /* PROCESS DIAGRAM */
-.process-intro { font-family: 'Roboto', sans-serif; font-size: 1rem; color: #333333; line-height: 1.65rem; margin-bottom: 2rem; text-align: justify; }
+.process-intro { font-family: 'Roboto', sans-serif; font-size: 1.25rem; color: #404040; line-height: 2rem; margin-bottom: 2rem; text-align: justify; }
 .process-diagram { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2.25rem 1.5rem; margin: 2rem 0; overflow-x: auto; }
 .process-steps-row { display: flex; align-items: center; justify-content: center; min-width: 560px; }
 .p-step { text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
@@ -347,28 +347,28 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
     <p style="font-family:'Roboto', sans-serif; font-size:1rem; color:#333333; line-height:1.65rem; margin-bottom:1.25rem; text-align:justify;">Our values aren't a wall poster — they shape how we hire, how we work, and what we reward. Here's what we're listening for in your answers:</p>
     <div class="values-grid">
       <div class="value-card">
-        <div class="value-card-top"><span class="value-icon">⚡</span><span class="value-name">Effortless</span></div>
+        <div class="value-card-top"><span class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#FFC000" stroke="#000000" stroke-width="1"/></svg></span><span class="value-name">Effortless</span></div>
         <div class="value-subtitle">We make the complex simple</div>
         <div class="value-desc">We look for people who naturally seek to simplify, automate, and remove friction — who instinctively ask "how do we make this easier?" rather than tolerating unnecessary complexity.</div>
         <div class="value-tags"><span class="value-tag">Automate</span><span class="value-tag">Streamline</span><span class="value-tag">Simplify</span><span class="value-tag">Remove friction</span></div>
       </div>
       <div class="value-card">
-        <div class="value-card-top"><span class="value-icon">🙌</span><span class="value-name">Empowered</span></div>
+        <div class="value-card-top"><span class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="8" cy="8" r="4" fill="#FFC000" stroke="#000000" stroke-width="1"/><circle cx="16" cy="8" r="4" fill="#FFC000" stroke="#000000" stroke-width="1"/><rect x="4" y="15" width="16" height="7" rx="2" fill="#FFC000" stroke="#000000" stroke-width="1"/></svg></span><span class="value-name">Empowered</span></div>
         <div class="value-subtitle">We trust our people</div>
         <div class="value-desc">We look for people who take initiative, make decisions independently, and feel genuine ownership over their outcomes.</div>
         <div class="value-tags"><span class="value-tag">Ownership</span><span class="value-tag">Autonomy</span><span class="value-tag">Initiative</span><span class="value-tag">Accountability</span></div>
       </div>
       <div class="value-card">
-        <div class="value-card-top"><span class="value-icon">🚀</span><span class="value-name">Relentless</span></div>
+        <div class="value-card-top"><span class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="14" rx="3" fill="#FFC000" stroke="#000000" stroke-width="1"/><polygon points="12,22 8,16 16,16" fill="#FFC000" stroke="#000000" stroke-width="1"/></svg></span><span class="value-name">Relentless</span></div>
         <div class="value-subtitle">We never settle</div>
         <div class="value-desc">We look for people who push for meaningful, lasting improvement — not just quick fixes. People who care deeply about quality, long-term impact, and raising the bar continuously.</div>
         <div class="value-tags"><span class="value-tag">Drive</span><span class="value-tag">Continuous improvement</span><span class="value-tag">Never settle</span><span class="value-tag">Tenacious</span></div>
       </div>
     </div>
     <div class="values-dark" style="margin-top:1rem;">
-      <div class="vd-row"><span class="vd-label">⚡ Effortless</span> — our product is exceptional, intuitive, and instantly adopted. Our people make the complex feel simple.</div>
-      <div class="vd-row"><span class="vd-label">🙌 Empowered</span> — our people are trusted, accountable, and customer-obsessed. They make decisions and own outcomes.</div>
-      <div class="vd-row"><span class="vd-label">🚀 Relentless</span> — our performance is world-class, innovative, and AI-driven. We never stop improving.</div>
+      <div class="vd-row"><span class="vd-label"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#FFC000" stroke="#FFC000" stroke-width="1"/></svg>Effortless</span> — our product is exceptional, intuitive, and instantly adopted. Our people make the complex feel simple.</div>
+      <div class="vd-row"><span class="vd-label"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:4px;"><circle cx="8" cy="8" r="4" fill="#FFC000" stroke="#FFC000" stroke-width="1"/><circle cx="16" cy="8" r="4" fill="#FFC000" stroke="#FFC000" stroke-width="1"/><rect x="4" y="15" width="16" height="7" rx="2" fill="#FFC000" stroke="#FFC000" stroke-width="1"/></svg>Empowered</span> — our people are trusted, accountable, and customer-obsessed. They make decisions and own outcomes.</div>
+      <div class="vd-row"><span class="vd-label"><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:4px;"><rect x="9" y="2" width="6" height="14" rx="3" fill="#FFC000" stroke="#FFC000" stroke-width="1"/><polygon points="12,22 8,16 16,16" fill="#FFC000" stroke="#FFC000" stroke-width="1"/></svg>Relentless</span> — our performance is world-class, innovative, and AI-driven. We never stop improving.</div>
     </div>
   </div>
 
