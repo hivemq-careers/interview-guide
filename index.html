@@ -79,7 +79,11 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 .vm-label { color: var(--yellow); font-weight: 700; }
 .vm-text { color: rgba(255,255,255,0.90); }
 /* INDUSTRIES */
-.industry-tags { display: flex; flex-wrap: nowrap; gap: 8px; margin: 1.5rem 0; overflow-x: auto; padding-bottom: 4px; }
+.industry-tags { display: flex; flex-wrap: nowrap; gap: 8px; margin: 1.5rem 0; overflow-x: auto; padding-bottom: 14px; scrollbar-width: thin; scrollbar-color: var(--yellow) #ececec; }
+.industry-tags::-webkit-scrollbar { height: 6px; }
+.industry-tags::-webkit-scrollbar-track { background: #ececec; border-radius: 999px; }
+.industry-tags::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 999px; }
+.industry-tags::-webkit-scrollbar-thumb:hover { background: #EBB100; }
 .industry-tag { background: var(--black); color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: background 0.2s; }
 .industry-tag:hover { background: #0c5a70; }
 /* CASE STUDIES */
