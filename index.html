@@ -79,11 +79,12 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 .vm-label { color: var(--yellow); font-weight: 700; }
 .vm-text { color: rgba(255,255,255,0.90); }
 /* INDUSTRIES */
-.industry-tags { display: flex; flex-wrap: nowrap; gap: 8px; margin: 1.5rem 0; overflow-x: auto; padding-bottom: 14px; scrollbar-width: thin; scrollbar-color: var(--yellow) #ececec; }
-.industry-tags::-webkit-scrollbar { height: 6px; }
-.industry-tags::-webkit-scrollbar-track { background: #ececec; border-radius: 999px; }
-.industry-tags::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 999px; }
-.industry-tags::-webkit-scrollbar-thumb:hover { background: #EBB100; }
+.industry-tags-wrap { margin: 1.5rem 0; }
+.industry-tags { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.industry-tags::-webkit-scrollbar { display: none; }
+.industry-scrollbar { height: 6px; background: #ececec; border-radius: 999px; margin-top: 10px; position: relative; cursor: pointer; }
+.industry-scrollbar-thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--yellow); border-radius: 999px; cursor: grab; }
+.industry-scrollbar-thumb:active { cursor: grabbing; }
 .industry-tag { background: var(--black); color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: background 0.2s; }
 .industry-tag:hover { background: #0c5a70; }
 /* CASE STUDIES */
@@ -378,6 +379,7 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
 
   <h2 style="font-family:'Raleway', sans-serif; font-size:2rem; font-weight:600; line-height:2.8rem; color:var(--black); margin-bottom:1.25rem; margin-top:2.5rem; letter-spacing:0;">Industries we serve</h2>
   <p>HiveMQ operates at the intersection of industrial operations and modern data infrastructure. Our platform is trusted across sectors where real-time data reliability is mission-critical.</p>
+  <div class="industry-tags-wrap">
   <div class="industry-tags">
           <a href="https://www.hivemq.com/solutions/manufacturing/" target="_blank" rel="noopener" class="industry-tag">Smart Manufacturing</a>
           <a href="https://www.hivemq.com/solutions/automotive-industry/" target="_blank" rel="noopener" class="industry-tag">Automotive</a>
@@ -387,6 +389,8 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; 
           <a href="https://www.hivemq.com/solutions/data-center-monitoring/" target="_blank" rel="noopener" class="industry-tag">Data Centers</a>
           <a href="https://www.hivemq.com/solutions/automotive-industry/" target="_blank" rel="noopener" class="industry-tag">Connected Vehicles</a>
         </div>
+        <div class="industry-scrollbar"><div class="industry-scrollbar-thumb"></div></div>
+      </div>
 
   <h2 style="font-family:'Raleway', sans-serif; font-size:2rem; font-weight:600; line-height:2.8rem; color:var(--black); margin-bottom:1.25rem; margin-top:2.5rem; letter-spacing:0;">Our customers — and the problems we solve for them</h2>
   <p>Our customers operate in environments where data loss, latency, or downtime carry serious real-world consequences. Enterprises like Audi, BMW, Ford, Mercedes-Benz, Siemens, Liberty Global, and Eli Lilly choose HiveMQ because reliability is non-negotiable for them.</p>
@@ -769,6 +773,42 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-25% 0px -65% 0px' });
 sections.forEach(s => obs.observe(s));
+(function(){
+  var container = document.querySelector('.industry-tags');
+  var thumb = document.querySelector('.industry-scrollbar-thumb');
+  var track = document.querySelector('.industry-scrollbar');
+  if(!container || !thumb || !track) return;
+  function update(){
+    var ratio = container.clientWidth / container.scrollWidth;
+    if(ratio >= 1){ track.style.display = 'none'; return; }
+    track.style.display = 'block';
+    var thumbPct = Math.max(ratio * 100, 15);
+    var maxScroll = container.scrollWidth - container.clientWidth;
+    var scrollRatio = maxScroll > 0 ? container.scrollLeft / maxScroll : 0;
+    thumb.style.width = thumbPct + '%';
+    thumb.style.left = (scrollRatio * (100 - thumbPct)) + '%';
+  }
+  container.addEventListener('scroll', update);
+  window.addEventListener('resize', update);
+  update();
+  var dragging = false;
+  function moveTo(clientX){
+    var rect = track.getBoundingClientRect();
+    var thumbW = thumb.offsetWidth;
+    var x = clientX - rect.left - thumbW/2;
+    var maxX = rect.width - thumbW;
+    x = Math.max(0, Math.min(x, maxX));
+    var r = maxX > 0 ? x / maxX : 0;
+    container.scrollLeft = r * (container.scrollWidth - container.clientWidth);
+  }
+  thumb.addEventListener('mousedown', function(e){ dragging = true; e.preventDefault(); });
+  window.addEventListener('mousemove', function(e){ if(dragging) moveTo(e.clientX); });
+  window.addEventListener('mouseup', function(){ dragging = false; });
+  track.addEventListener('click', function(e){ if(e.target !== thumb) moveTo(e.clientX); });
+  thumb.addEventListener('touchstart', function(){ dragging = true; }, {passive:true});
+  window.addEventListener('touchmove', function(e){ if(dragging) moveTo(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchend', function(){ dragging = false; });
+})();
 </script>
 </body>
 </html>
